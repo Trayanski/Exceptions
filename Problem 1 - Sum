@@ -1,0 +1,92 @@
+
+import java.util.Scanner;
+import java.io.*;
+
+class Program {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		
+		String firstInput = scanner.nextLine();
+		int firstInt = 0;
+		int firstDouble = 0;
+		String typeOfFirstNum = "";
+		
+		if(isParsableInt(firstInput)){
+			typeOfFirstNum = "Integer";
+			
+		} else if(isParsableDouble(firstInput)){
+			typeOfFirstNum = "Double";
+		} else{
+			System.out.println("The first number is problematic!");
+		}
+		
+		String secondInput = scanner.nextLine();
+		int secondInt = 0;
+		double secondDouble = 0;
+		String typeOfSecondNum = "";
+		
+		if(isParsableInt(secondInput)){
+			typeOfSecondNum = "Integer";
+		} else if(isParsableDouble(secondInput)){
+			typeOfSecondNum = "Double";
+		} else{
+			System.out.println("The second number is problematic!");
+		}
+		
+		int sumInt = 0;
+		double sumDouble = 0;
+		try {
+			if(typeOfFirstNum.equals("Integer")&&typeOfSecondNum.equals("Integer")){
+				sumInt = SumInt(firstInput, secondInput);
+				System.out.println("The sum is: " + sumInt);
+			} else if (typeOfFirstNum.equals("Double")&&typeOfSecondNum.equals("Double")){
+				sumDouble = SumDouble(firstInput, secondInput);
+				System.out.println("The sum is: " + sumDouble);
+			}else {
+				throw new ClassCastException("The two numbers are not compatable.");
+			}
+		} catch (ClassCastException ex) {
+			System.out.println(ex.getMessage());
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		System.out.println("Press any key to continue...");
+	}
+		
+	public static int SumInt(String str1, String str2) {
+		int sum = 0;
+		int firstInt = Integer.parseInt(str1);
+		int secondInt = Integer.parseInt(str2);
+		return sum = firstInt + secondInt;
+	}
+	
+	public static double SumDouble(String str1, String str2) {
+		double sum = 0;
+		double firstDouble = Double.parseDouble(str1);
+		double secondDouble = Double.parseDouble(str2);
+		return sum = firstDouble + secondDouble;
+	}
+	
+	public static boolean isParsableInt(String input){
+	    boolean parsable = true;
+	    try{
+	        Integer.parseInt(input);
+	    }catch(NumberFormatException e){
+	        parsable = false;
+	    }
+	    
+	    return parsable;
+	}
+	
+	public static boolean isParsableDouble(String input){
+	    boolean parsable = true;
+	    try{
+	        Double.parseDouble(input);
+	    }catch(NumberFormatException e){
+	        parsable = false;
+	    }
+	    
+	    return parsable;
+	}
+}
