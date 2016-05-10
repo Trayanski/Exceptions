@@ -1,0 +1,35 @@
+import java.util.Scanner;
+import java.io.*;
+
+public class Program {
+	public static void main(String[] args) throws MyOwnException {
+		Scanner scanner = new Scanner(System.in);
+		
+		int input = scanner.nextInt();
+		scanner.nextLine();
+		
+		for(int i = 1; i<=2; i++) {
+			try{
+				if(input>=0 && input<=100){
+					System.out.printf("The input number - %d is from the interval (0 - 100).\n", input);
+				} else{
+					throw new MyOwnException ("The input is out of the bounds!");
+				}
+				
+			} catch(MyOwnException ex) {
+				System.out.println(ex.getMessage());
+			}
+						
+			input = scanner.nextInt();
+			scanner.nextLine();
+			i--;
+		}
+	}
+	
+	public static class MyOwnException extends Exception {
+		public MyOwnException () {}
+	        public MyOwnException (String message) {
+	        	super (message);
+	        }
+        }
+}
