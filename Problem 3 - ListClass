@@ -1,0 +1,41 @@
+import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+
+public class Program {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		ObjectListClass objList = new ObjectListClass();
+		objList.add(1);
+		objList.add(2);
+		objList.printAllElements();
+		objList.remove();
+		objList.printAllElements();
+	}
+}
+
+class ObjectListClass{
+	List<Object> listOfObjects = new ArrayList<Object>();
+	public int BoundOfList;
+	
+	public ObjectListClass(){
+	}
+	
+	public ObjectListClass(int boundOfList){
+		this.BoundOfList = boundOfList;
+	}
+	
+	public void add(Object obj){
+		listOfObjects.add(obj);
+	}
+	
+	public void remove(){
+		listOfObjects.remove(listOfObjects.get(listOfObjects.size() - 1));
+	}
+	
+	public void printAllElements(){
+		for(Object obj : listOfObjects) {
+			System.out.println(obj);
+		}
+	}
+}
