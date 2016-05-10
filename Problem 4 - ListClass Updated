@@ -1,0 +1,84 @@
+import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+
+public class Program {
+	public static void main(String[] args) throws NotEnoughSpaceInListException, NoElementsToBeRemovedException {
+		Scanner scanner = new Scanner(System.in);
+		ObjectListClass objList = new ObjectListClass();
+		objList.remove();
+		objList.add(1);
+		objList.add(2);
+		objList.printAllElements();
+		objList.remove();
+		objList.printAllElements();
+		objList.add(3);
+		objList.printAllElements();
+		objList.add(4);
+		objList.printAllElements();
+	}
+}
+
+class ObjectListClass{
+	List<Object> listOfObjects = new ArrayList<Object>();
+	public int BoundOfList = 2;
+	
+	public ObjectListClass(){
+	}
+	
+	public ObjectListClass(int boundOfList){
+		this.BoundOfList = boundOfList;
+	}
+	
+	public int getBound(){
+		return this.BoundOfList;
+	}
+	
+	public void setBound(int boundOfList){
+		this.BoundOfList = boundOfList;
+	}
+	
+	public void add(Object obj){
+		try{
+			if(listOfObjects.size() == this.BoundOfList){
+				throw new NotEnoughSpaceInListException("The list is full and your last object is NOT going to be saved.");
+			} else{
+				listOfObjects.add(obj);
+			}
+		} catch (NotEnoughSpaceInListException ex){
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	public void remove(){
+		try{
+			if(listOfObjects.size() == 0){
+				throw new NoElementsToBeRemovedException("There are no objects in the list. Nothig is removed!");
+			} else{
+				listOfObjects.remove(listOfObjects.get(listOfObjects.size() - 1));
+			}
+		} catch (NoElementsToBeRemovedException ex){
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	public void printAllElements(){
+		for(Object obj : listOfObjects) {
+			System.out.println(obj);
+		}
+	}
+}
+
+class NotEnoughSpaceInListException extends Exception {
+	public NotEnoughSpaceInListException () {}
+        public NotEnoughSpaceInListException (String message) {
+        	super (message);
+        }
+}
+
+class NoElementsToBeRemovedException extends Exception {
+	public NoElementsToBeRemovedException () {}
+        public NoElementsToBeRemovedException (String message) {
+        	super (message);
+        }
+}
